@@ -266,8 +266,8 @@ TEST(LeftoverTrackerBackend, GetReportMostCommonLeftoverFood) {
       << "Expected exactly 1 leftover food in this test case.";
 }
 
-// Get report ComputeMostCostlyLeftoverProducingMeal
-TEST(LeftoverTrackerBackend, GetReportMostCostlyLeftoverProducingMeal) {
+// Get report ComputeMostLeftoverProducingMeal
+TEST(LeftoverTrackerBackend, GetReportMostLeftoverProducingMeal) {
   LeftoverTrackerBackend backend{""};
 
   // Add new record
