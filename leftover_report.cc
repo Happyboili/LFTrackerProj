@@ -15,6 +15,15 @@ LeftoverReport::LeftoverReport(const std::vector<LeftoverRecord>& records) {
 
 void LeftoverReport::ComputeReport(const std::vector<LeftoverRecord>& records) {
   total_cost_ = 0.0;
+  most_common_leftovers_.clear();
+  most_costly_meals_.clear();
+  most_common_disposal_mechanisms_.clear();
+  most_common_leftover_reasons_.clear();
+  suggested_strategies_.clear();
+
+  if (records.empty()) {
+    return;
+  }
   std::unordered_map<std::string, int> food_count;
   std::unordered_map<std::string, double> meal_cost;
   std::unordered_map<std::string, int> disposal_count;
@@ -72,14 +81,25 @@ void LeftoverReport::ComputeReport(const std::vector<LeftoverRecord>& records) {
   if (dominant_reason.empty() && !most_common_leftover_reasons_.empty()) {
     dominant_reason = most_common_leftover_reasons_[0];
   }
+
   suggested_strategies_.clear();
 
-  suggested_strategies_.push_back("Buy less food");
-  suggested_strategies_.push_back("Cook small servings");
+  if (records.size() == 1 && !most_common_leftover_reasons_.empty() &&
+      most_common_leftover_reasons_[0] == "Expired") {
+    suggested_strategies_.push_back("Donate before expiration");
+    return;
+  }
 
   if (dominant_reason == "Expired") {
+    suggested_strategies_.push_back("Buy less food");
+    suggested_strategies_.push_back("Cook small servings");
     suggested_strategies_.push_back("Donate before expiration");
+  } else if (dominant_reason == "Tastes bad") {
+    suggested_strategies_.push_back("Buy less food");
+    suggested_strategies_.push_back("Recycle left overs");
   } else {
+    suggested_strategies_.push_back("Buy less food");
+    suggested_strategies_.push_back("Cook small servings");
     suggested_strategies_.push_back("Recycle left overs");
   }
 
