@@ -47,8 +47,7 @@ class LeftoverTrackerBackend {
 
  private:
   // A top level class object to leftovers.
-  // TODO: Add a LeftoverTracker object as a member variable here. Make sure you
-  // stick to Google's style guide when naming your variable.
+  LeftoverTracker leftover_tracker_;
 
   // File path of the file that stores all the leftover records in JSON
   // format.

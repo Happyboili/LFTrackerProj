@@ -1,21 +1,32 @@
-// Please fill in below.
-// <Your name>
-// <Your section number> (e.g. CPSC 121L-01)
-// <Date>
-// <Your csu.fullerton.edu email>
-// <Your GitHub username>
-
+// Marco Deng
+// CPSC 121L-17
+// 4/14/25
+// mdeng777@csu.fullerton.edu
+// @Happyboili
 #include "leftover_tracker.h"
 
-// ========================= YOUR CODE HERE =========================
-// This implementation file is where you should implement
-// the member functions declared in the header (leftover_tracker.h), only
-// if you didn't implement them inline within leftover_tracker.h.
-//
-// Remember to specify the name of the class with :: in this format:
-//     <return type> MyClassName::MyFunction() {
-//        ...
-//     }
-// to tell the compiler that each function belongs to the LeftoverTracker
-// class.
-// ===================================================================
+#include <algorithm>
+
+bool LeftoverTracker::AddRecord(const LeftoverRecord& record) {
+  auto it = std::find(records_.begin(), records_.end(), record);
+  if (it != records_.end()) return false;
+  records_.push_back(record);
+  return true;
+}
+
+bool LeftoverTracker::DeleteRecord(const LeftoverRecord& record) {
+  auto it = std::find(records_.begin(), records_.end(), record);
+  if (it != records_.end()) {
+    records_.erase(it);
+    return true;
+  }
+  return false;
+}
+
+const std::vector<LeftoverRecord>& LeftoverTracker::GetRecords() const {
+  return records_;
+}
+
+LeftoverReport LeftoverTracker::GenerateReport() const {
+  return LeftoverReport(records_);
+}
