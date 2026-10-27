@@ -1,8 +1,8 @@
 # Leftover Food Tracker Project
 
-Welcome to the Leftover Food Tracker project! 
+Leftover Food Tracker project! 
 
-CPSC 121 Final Project
+Object Oriented Programing Final Project
 
 Written in C++ using OOP, Parameters and Methods for Backend and JS for the front.
 
